@@ -3,6 +3,7 @@ COPY . .
 RUN mvn clean package -DskipTests
 
 FROM openjdk:17.0.1-jdk-slim
-COPY --from=build /target/payment-search-0.0.1-SNAPSHOT.jar payment-search.jar
+WORKDIR /app
+COPY -- from=build /app/target/payment-search.jar .
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","payment-search.jar"]
